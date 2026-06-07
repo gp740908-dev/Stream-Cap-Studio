@@ -1,5 +1,3 @@
-version: "3.9"
-
 # StreamCap Studio — Docker Compose
 # Services: api, worker, beat, redis, db, frontend, nginx
 
@@ -101,10 +99,9 @@ services:
       celery -A celery_app beat
       --loglevel=info
       --scheduler celery.beat.PersistentScheduler
-      --schedule /app/celerybeat-schedule
+      --schedule /tmp/celerybeat-schedule
     env_file: .env
-    volumes:
-      - beat_schedule:/app/celerybeat-schedule
+    volumes: []
     depends_on:
       db:
         condition: service_healthy
@@ -150,7 +147,6 @@ services:
 volumes:
   postgres_data:
   redis_data:
-  beat_schedule:
 
 networks:
   internal:
