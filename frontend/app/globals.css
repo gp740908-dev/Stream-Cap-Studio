@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 91%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 91%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 91%;
+    --primary: 38 93% 51%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 91%;
+    --muted: 0 0% 7%;
+    --muted-foreground: 0 0% 53%;
+    --accent: 38 93% 51%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 14%;
+    --input: 0 0% 10%;
+    --ring: 38 93% 51%;
+    --radius: 4px;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-[#0a0a0a] text-foreground font-sans antialiased;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Scrollbars — thin, subtle */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+  /* Monospace numbers via font-mono */
+  .tabular { font-family: "Geist Mono", "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+}
+
+@layer components {
+  /* ─── Status dot indicators ───────────────────────────────────────────────── */
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+  .status-dot.recording { @apply bg-red-500 animate-pulse-amber; }
+  .status-dot.processing { @apply bg-blue-500; }
+  .status-dot.done { @apply bg-green-500; }
+  .status-dot.failed { @apply bg-red-500; }
+  .status-dot.queued { @apply bg-neutral-500; }
+  .status-dot.cancelled { @apply bg-neutral-600; }
+
+  /* ─── Resource bar ────────────────────────────────────────────────────────── */
+  .resource-bar {
+    @apply h-1 rounded-full bg-background-border overflow-hidden;
+  }
+  .resource-bar-fill {
+    @apply h-full rounded-full transition-all duration-300;
+  }
+}
