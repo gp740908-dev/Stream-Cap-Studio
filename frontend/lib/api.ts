@@ -61,11 +61,15 @@ export async function login(username: string, password: string): Promise<string>
   const data = await res.json();
   const token: string = data.access_token;
   localStorage.setItem("streamcap_token", token);
+  // Also set cookie so middleware can detect auth on server side
+  document.cookie = `streamcap_token=${token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Strict`;
   return token;
 }
 
 export function logout(): void {
   localStorage.removeItem("streamcap_token");
+  document.cookie = "streamcap_token=; path=/; max-age=0";
+  window.location.href = "/login";
 }
 
 // ─── Jobs ─────────────────────────────────────────────────────────────────────

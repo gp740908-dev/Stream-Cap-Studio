@@ -10,8 +10,10 @@ import {
   Settings,
   Radio,
   ChevronRight,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { logout } from "@/lib/api";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -23,6 +25,9 @@ const NAV_ITEMS = [
 
 export function Sidebar() {
   const pathname = usePathname();
+
+  // Don't render sidebar on login page
+  if (pathname === "/login") return null;
 
   return (
     <aside className="w-56 min-h-screen flex flex-col bg-[#111111] border-r border-[#1f1f1f]">
@@ -79,8 +84,15 @@ export function Sidebar() {
       </nav>
 
       {/* ─── Footer ─────────────────────────────────────────────────────────── */}
-      <div className="px-4 py-3 border-t border-[#1f1f1f]">
-        <p className="text-[10px] text-[#333] font-mono">v1.0.0</p>
+      <div className="px-3 py-3 border-t border-[#1f1f1f] space-y-1">
+        <button
+          onClick={() => logout()}
+          className="flex items-center gap-2.5 w-full px-3 py-2 rounded text-[13px] font-medium text-[#555] hover:text-red-400 hover:bg-red-500/5 transition-colors"
+        >
+          <LogOut className="w-4 h-4 flex-shrink-0" strokeWidth={1.5} />
+          <span>Sign out</span>
+        </button>
+        <p className="text-[10px] text-[#2a2a2a] font-mono px-3">v1.0.0</p>
       </div>
     </aside>
   );
